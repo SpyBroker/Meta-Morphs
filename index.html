@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Student Portal</title>
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-24);
+        }
+
+        .login-box {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        .header {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-20) var(--space-24);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-left p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-16);
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-role {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .user-email {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: 0 var(--space-24);
+            display: flex;
+            gap: var(--space-8);
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: var(--space-16) var(--space-20);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            color: var(--color-text);
+            background: var(--color-secondary);
+        }
+
+        .nav-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-24);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+            margin-bottom: var(--space-16);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-16);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: var(--space-12);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-family: inherit;
+            background: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(var(--color-teal-500-rgb), 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            padding: var(--space-12) var(--space-24);
+            border: none;
+            border-radius: var(--radius-base);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .notice-item, .event-item, .complaint-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin-bottom: var(--space-12);
+        }
+
+        .notice-header, .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-8);
+        }
+
+        .notice-title, .event-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+
+        .notice-category {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .category-academic {
+            background: var(--color-bg-1);
+            color: #1d4ed8;
+        }
+
+        .category-event {
+            background: var(--color-bg-3);
+            color: #15803d;
+        }
+
+        .category-general {
+            background: var(--color-bg-2);
+            color: #b45309;
+        }
+
+        .notice-date, .event-date {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        .notice-desc, .event-details {
+            font-size: 14px;
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: rgba(var(--color-orange-500-rgb), 0.15);
+            color: var(--color-warning);
+        }
+
+        .status-in-progress {
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+            color: var(--color-primary);
+        }
+
+        .status-resolved {
+            background: var(--color-bg-3);
+            color: #15803d;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-8) var(--space-16);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-surface);
+            color: var(--color-text);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: var(--color-secondary);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .event-meta {
+            display: flex;
+            gap: var(--space-16);
+            margin-top: var(--space-8);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .complaint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-12);
+        }
+
+        .complaint-category {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .urgency-high {
+            color: var(--color-error);
+        }
+
+        .urgency-medium {
+            color: var(--color-warning);
+        }
+
+        .urgency-low {
+            color: var(--color-primary);
+        }
+
+        .success-message {
+            background: var(--color-bg-3);
+            color: #15803d;
+            padding: var(--space-12) var(--space-16);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-16);
+            font-size: 14px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .error-message {
+            background: rgba(var(--color-red-500-rgb), 0.15);
+            color: var(--color-error);
+            padding: var(--space-12) var(--space-16);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-16);
+            font-size: 14px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-16);
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            padding: var(--space-12);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .attendance-table th {
+            background: var(--color-secondary);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .attendance-table td {
+            font-size: 14px;
+        }
+
+        .attendance-bar {
+            height: 8px;
+            background: var(--color-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .attendance-fill {
+            height: 100%;
+            background: var(--color-primary);
+            transition: width 0.3s;
+        }
+
+        .attendance-fill.low {
+            background: var(--color-error);
+        }
+
+        .attendance-fill.medium {
+            background: var(--color-warning);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-8);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: var(--space-12);
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-24);
+            color: var(--color-text-secondary);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-20);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🎓 NeoCampus</h1>
+                <p>Login to access your portal</p>
+            </div>
+            <div id="loginError" class="error-message"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="admin@kiit.ac.in or student@kiit.ac.in" required>
+                </div>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div style="margin-top: 16px; font-size: 13px; color: var(--color-text-secondary); text-align: center;">
+                <strong>Demo Credentials:</strong><br>
+                Admin: admin@kiit.ac.in (any password)<br>
+                Student: student@kiit.ac.in (any password)
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (Hidden initially) -->
+    <div id="mainApp" class="hidden">
+        <div class="header">
+            <div class="header-left">
+                <h1>🎓 NeoCampus</h1>
+                <p>Your centralized platform for campus life management</p>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-role" id="userRole"></div>
+                    <div class="user-email" id="userEmail"></div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Admin Navigation -->
+        <nav id="adminNav" class="nav hidden">
+            <button class="nav-btn active" onclick="switchSection('admin-notices')">📢 Notices</button>
+            <button class="nav-btn" onclick="switchSection('admin-events')">📅 Events</button>
+            <button class="nav-btn" onclick="switchSection('admin-clubs')">🎯 Club Activities</button>
+            <button class="nav-btn" onclick="switchSection('admin-complaints')">🎫 Complaints</button>
+            <button class="nav-btn" onclick="switchSection('admin-feedback')">💬 Feedback</button>
+            <button class="nav-btn" onclick="switchSection('admin-attendance')">📊 Attendance</button>
+        </nav>
+
+        <!-- Student Navigation -->
+        <nav id="studentNav" class="nav hidden">
+            <button class="nav-btn active" onclick="switchSection('student-notices')">📢 Notices</button>
+            <button class="nav-btn" onclick="switchSection('student-events')">📅 Events</button>
+            <button class="nav-btn" onclick="switchSection('student-clubs')">🎯 Club Activities</button>
+            <button class="nav-btn" onclick="switchSection('student-complaints')">🎫 Submit Complaint</button>
+            <button class="nav-btn" onclick="switchSection('student-feedback')">💬 Feedback</button>
+            <button class="nav-btn" onclick="switchSection('student-attendance')">📊 My Attendance</button>
+        </nav>
+
+        <div class="container">
+            <!-- ADMIN SECTIONS -->
+            <!-- Admin Notices -->
+            <div id="admin-notices" class="section active">
+                <h2 class="section-title" style="margin-bottom: 20px;">Manage Notices</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Post New Notice</h3>
+                    <div id="adminNoticeSuccess" class="success-message"></div>
+                    <form id="adminNoticeForm">
+                        <div class="form-group">
+                            <label>Title *</label>
+                            <input type="text" class="form-control" id="adminNoticeTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select class="form-control" id="adminNoticeCategory" required>
+                                <option value="Academic">Academic</option>
+                                <option value="Event">Event</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea class="form-control" id="adminNoticeDesc" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Notice</button>
+                    </form>
+                </div>
+                <div style="margin-top: 32px;">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">All Notices</h3>
+                    <div id="adminNoticesList"></div>
+                </div>
+            </div>
+
+            <!-- Admin Events -->
+            <div id="admin-events" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Manage Events</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Add New Event</h3>
+                    <div id="adminEventSuccess" class="success-message"></div>
+                    <form id="adminEventForm">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Event Name *</label>
+                                <input type="text" class="form-control" id="adminEventName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Date *</label>
+                                <input type="date" class="form-control" id="adminEventDate" required>
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Time *</label>
+                                <input type="time" class="form-control" id="adminEventTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Location *</label>
+                                <input type="text" class="form-control" id="adminEventLocation" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" id="adminEventDescription"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Event</button>
+                    </form>
+                </div>
+                <div style="margin-top: 32px;">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">All Events</h3>
+                    <div id="adminEventsList"></div>
+                </div>
+            </div>
+
+            <!-- Admin Club Activities -->
+            <div id="admin-clubs" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Manage Club Activities</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Post Club Activity</h3>
+                    <div id="adminClubSuccess" class="success-message"></div>
+                    <form id="adminClubForm">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Club Name *</label>
+                                <input type="text" class="form-control" id="adminClubName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Activity Type *</label>
+                                <select class="form-control" id="adminClubType" required>
+                                    <option value="Meeting">Meeting</option>
+                                    <option value="Workshop">Workshop</option>
+                                    <option value="Competition">Competition</option>
+                                    <option value="Event">Event</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Activity Title *</label>
+                            <input type="text" class="form-control" id="adminClubTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea class="form-control" id="adminClubDesc" required></textarea>
+                        </div>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Date *</label>
+                                <input type="date" class="form-control" id="adminClubDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Time *</label>
+                                <input type="time" class="form-control" id="adminClubTime" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Activity</button>
+                    </form>
+                </div>
+                <div style="margin-top: 32px;">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">All Club Activities</h3>
+                    <div id="adminClubsList"></div>
+                </div>
+            </div>
+
+            <!-- Admin Complaints -->
+            <div id="admin-complaints" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Student Complaints</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="pendingCount">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="progressCount">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="resolvedCount">0</div>
+                        <div class="stat-label">Resolved</div>
+                    </div>
+                </div>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterAdminComplaints('All')">All</button>
+                    <button class="filter-btn" onclick="filterAdminComplaints('Pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterAdminComplaints('In Progress')">In Progress</button>
+                    <button class="filter-btn" onclick="filterAdminComplaints('Resolved')">Resolved</button>
+                </div>
+                <div id="adminComplaintsList"></div>
+            </div>
+
+            <!-- Admin Feedback -->
+            <div id="admin-feedback" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Student Feedback</h2>
+                <div id="adminFeedbackList"></div>
+            </div>
+
+            <!-- Admin Attendance -->
+            <div id="admin-attendance" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Student Attendance Overview</h2>
+                <div class="card">
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Total Classes</th>
+                                <th>Classes Attended</th>
+                                <th>Attendance %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAttendanceTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- STUDENT SECTIONS -->
+            <!-- Student Notices -->
+            <div id="student-notices" class="section active">
+                <h2 class="section-title" style="margin-bottom: 20px;">Notice Board</h2>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterStudentNotices('All')">All</button>
+                    <button class="filter-btn" onclick="filterStudentNotices('Academic')">Academic</button>
+                    <button class="filter-btn" onclick="filterStudentNotices('Event')">Event</button>
+                    <button class="filter-btn" onclick="filterStudentNotices('General')">General</button>
+                </div>
+                <div id="studentNoticesList"></div>
+            </div>
+
+            <!-- Student Events -->
+            <div id="student-events" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Upcoming Events</h2>
+                <div id="studentEventsList"></div>
+            </div>
+
+            <!-- Student Club Activities -->
+            <div id="student-clubs" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Club Activities</h2>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterStudentClubs('All')">All</button>
+                    <button class="filter-btn" onclick="filterStudentClubs('Meeting')">Meetings</button>
+                    <button class="filter-btn" onclick="filterStudentClubs('Workshop')">Workshops</button>
+                    <button class="filter-btn" onclick="filterStudentClubs('Competition')">Competitions</button>
+                    <button class="filter-btn" onclick="filterStudentClubs('Event')">Events</button>
+                </div>
+                <div id="studentClubsList"></div>
+            </div>
+
+            <!-- Student Complaints -->
+            <div id="student-complaints" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Submit Complaint</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">New Complaint</h3>
+                    <div id="studentComplaintSuccess" class="success-message"></div>
+                    <form id="studentComplaintForm">
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Category *</label>
+                                <select class="form-control" id="studentComplaintCategory" required>
+                                    <option value="Hostel">Hostel</option>
+                                    <option value="Academic">Academic</option>
+                                    <option value="Infrastructure">Infrastructure</option>
+                                    <option value="Canteen">Canteen</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Urgency *</label>
+                                <select class="form-control" id="studentComplaintUrgency" required>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea class="form-control" id="studentComplaintDesc" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                    </form>
+                </div>
+                <div style="margin-top: 32px;">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">My Complaints</h3>
+                    <div id="studentComplaintsList"></div>
+                </div>
+            </div>
+
+            <!-- Student Feedback -->
+            <div id="student-feedback" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">Share Feedback</h2>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Submit Feedback</h3>
+                    <div id="studentFeedbackSuccess" class="success-message"></div>
+                    <form id="studentFeedbackForm">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select class="form-control" id="studentFeedbackCategory" required>
+                                <option value="Academics">Academics</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                                <option value="Events">Events & Activities</option>
+                                <option value="Services">Student Services</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Feedback *</label>
+                            <textarea class="form-control" id="studentFeedbackText" required placeholder="Share your thoughts, ideas, or concerns..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Student Attendance -->
+            <div id="student-attendance" class="section">
+                <h2 class="section-title" style="margin-bottom: 20px;">My Attendance</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="studentTotalClasses">0</div>
+                        <div class="stat-label">Total Classes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="studentAttendedClasses">0</div>
+                        <div class="stat-label">Classes Attended</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="studentAttendancePercent">0%</div>
+                        <div class="stat-label">Attendance</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom: 16px; font-size: 18px;">Subject-wise Attendance</h3>
+                    <div id="studentSubjectAttendance"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global State
+        let currentUser = null;
+        let notices = JSON.parse(localStorage.getItem('notices')) || [];
+        let events = JSON.parse(localStorage.getItem('events')) || [];
+        let clubs = JSON.parse(localStorage.getItem('clubs')) || [];
+        let complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+        let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        let attendance = JSON.parse(localStorage.getItem('attendance')) || [];
+
+        // Initialize sample data
+        if (notices.length === 0) {
+            notices = [
+                {
+                    id: Date.now(),
+                    title: 'Mid-Semester Examination Schedule',
+                    category: 'Academic',
+                    description: 'Mid-semester exams will be conducted from November 5-12, 2025. Detailed timetable will be shared by respective departments.',
+                    date: new Date().toISOString(),
+                    postedBy: 'admin'
+                },
+                {
+                    id: Date.now() + 1,
+                    title: 'Annual Tech Fest - Registration Open',
+                    category: 'Event',
+                    description: 'Register for TechnoVision 2025! Multiple competitions, workshops, and guest lectures. Registration deadline: October 30, 2025.',
+                    date: new Date().toISOString(),
+                    postedBy: 'admin'
+                }
+            ];
+            localStorage.setItem('notices', JSON.stringify(notices));
+        }
+
+        if (events.length === 0) {
+            events = [
+                {
+                    id: Date.now(),
+                    name: 'Guest Lecture on AI & Machine Learning',
+                    date: '2025-11-02',
+                    time: '14:00',
+                    location: 'Seminar Hall A',
+                    description: 'Industry expert will discuss latest trends in AI/ML'
+                }
+            ];
+            localStorage.setItem('events', JSON.stringify(events));
+        }
+
+        if (clubs.length === 0) {
+            clubs = [
+                {
+                    id: Date.now(),
+                    clubName: 'Coding Club',
+                    type: 'Workshop',
+                    title: 'Python Programming Workshop',
+                    description: 'Learn Python basics and advanced concepts. Open to all students.',
+                    date: '2025-11-05',
+                    time: '16:00',
+                    postedDate: new Date().toISOString()
+                }
+            ];
+            localStorage.setItem('clubs', JSON.stringify(clubs));
+        }
+
+        if (attendance.length === 0) {
+            attendance = [
+                { studentId: 'STU001', name: 'John Doe', total: 80, attended: 75, subjects: [
+                    { name: 'Mathematics', total: 20, attended: 19 },
+                    { name: 'Physics', total: 20, attended: 18 },
+                    { name: 'Chemistry', total: 20, attended: 19 },
+                    { name: 'Computer Science', total: 20, attended: 19 }
+                ]},
+                { studentId: 'STU002', name: 'Jane Smith', total: 80, attended: 68, subjects: [
+                    { name: 'Mathematics', total: 20, attended: 17 },
+                    { name: 'Physics', total: 20, attended: 17 },
+                    { name: 'Chemistry', total: 20, attended: 17 },
+                    { name: 'Computer Science', total: 20, attended: 17 }
+                ]},
+                { studentId: 'STU003', name: 'Mike Johnson', total: 80, attended: 72, subjects: [
+                    { name: 'Mathematics', total: 20, attended: 18 },
+                    { name: 'Physics', total: 20, attended: 18 },
+                    { name: 'Chemistry', total: 20, attended: 18 },
+                    { name: 'Computer Science', total: 20, attended: 18 }
+                ]}
+            ];
+            localStorage.setItem('attendance', JSON.stringify(attendance));
+        }
+
+        // Login Handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+
+            if (email === 'admin@kiit.ac.in') {
+                currentUser = { email: email, role: 'admin', name: 'Admin' };
+                showApp();
+            } else if (email === 'student@kiit.ac.in') {
+                currentUser = { email: email, role: 'student', name: 'Student User', studentId: 'STU001' };
+                showApp();
+            } else {
+                showError('loginError', 'Invalid credentials. Use admin@kiit.ac.in or student@kiit.ac.in');
+            }
+        });
+
+        function showApp() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            
+            document.getElementById('userRole').textContent = currentUser.role.toUpperCase();
+            document.getElementById('userEmail').textContent = currentUser.email;
+
+            if (currentUser.role === 'admin') {
+                document.getElementById('adminNav').classList.remove('hidden');
+                document.getElementById('studentNav').classList.add('hidden');
+                switchSection('admin-notices');
+                renderAdminNotices();
+                renderAdminEvents();
+                renderAdminClubs();
+                renderAdminComplaints();
+                renderAdminFeedback();
+                renderAdminAttendance();
+            } else {
+                document.getElementById('adminNav').classList.add('hidden');
+                document.getElementById('studentNav').classList.remove('hidden');
+                switchSection('student-notices');
+                renderStudentNotices();
+                renderStudentEvents();
+                renderStudentClubs();
+                renderStudentComplaints();
+                renderStudentAttendance();
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginForm').reset();
+        }
+
+        function switchSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Admin Notice Functions
+        document.getElementById('adminNoticeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const notice = {
+                id: Date.now(),
+                title: document.getElementById('adminNoticeTitle').value,
+                category: document.getElementById('adminNoticeCategory').value,
+                description: document.getElementById('adminNoticeDesc').value,
+                date: new Date().toISOString(),
+                postedBy: 'admin'
+            };
+            notices.unshift(notice);
+            localStorage.setItem('notices', JSON.stringify(notices));
+            showSuccess('adminNoticeSuccess', 'Notice posted successfully!');
+            this.reset();
+            renderAdminNotices();
+            renderStudentNotices();
+        });
+
+        function renderAdminNotices() {
+            const html = notices.length === 0 
+                ? '<div class="empty-state">No notices posted yet</div>'
+                : notices.map(notice => `
+                    <div class="notice-item">
+                        <div class="notice-header">
+                            <div>
+                                <div class="notice-title">${notice.title}</div>
+                                <div class="notice-date">${formatDate(notice.date)}</div>
+                            </div>
+                            <span class="notice-category category-${notice.category.toLowerCase()}">${notice.category}</span>
+                        </div>
+                        <div class="notice-desc">${notice.description}</div>
+                    </div>
+                `).join('');
+            document.getElementById('adminNoticesList').innerHTML = html;
+        }
+
+        // Admin Event Functions
+        document.getElementById('adminEventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const event = {
+                id: Date.now(),
+                name: document.getElementById('adminEventName').value,
+                date: document.getElementById('adminEventDate').value,
+                time: document.getElementById('adminEventTime').value,
+                location: document.getElementById('adminEventLocation').value,
+                description: document.getElementById('adminEventDescription').value
+            };
+            events.push(event);
+            events.sort((a, b) => new Date(a.date) - new Date(b.date));
+            localStorage.setItem('events', JSON.stringify(events));
+            showSuccess('adminEventSuccess', 'Event added successfully!');
+            this.reset();
+            renderAdminEvents();
+            renderStudentEvents();
+        });
+
+        function renderAdminEvents() {
+            const html = events.length === 0 
+                ? '<div class="empty-state">No events scheduled</div>'
+                : events.map(event => `
+                    <div class="event-item">
+                        <div class="event-title">${event.name}</div>
+                        <div class="event-date">${formatEventDate(event.date, event.time)}</div>
+                        ${event.description ? `<div class="event-details">${event.description}</div>` : ''}
+                        <div class="event-meta">
+                            <span>📍 ${event.location}</span>
+                        </div>
+                    </div>
+                `).join('');
+            document.getElementById('adminEventsList').innerHTML = html;
+        }
+
+        // Admin Club Functions
+        document.getElementById('adminClubForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const club = {
+                id: Date.now(),
+                clubName: document.getElementById('adminClubName').value,
+                type: document.getElementById('adminClubType').value,
+                title: document.getElementById('adminClubTitle').value,
+                description: document.getElementById('adminClubDesc').value,
+                date: document.getElementById('adminClubDate').value,
+                time: document.getElementById('adminClubTime').value,
+                postedDate: new Date().toISOString()
+            };
+            clubs.unshift(club);
+            localStorage.setItem('clubs', JSON.stringify(clubs));
+            showSuccess('adminClubSuccess', 'Club activity posted successfully!');
+            this.reset();
+            renderAdminClubs();
+            renderStudentClubs();
+        });
+
+        function renderAdminClubs() {
+            const html = clubs.length === 0 
+                ? '<div class="empty-state">No club activities posted</div>'
+                : clubs.map(club => `
+                    <div class="notice-item">
+                        <div class="notice-header">
+                            <div>
+                                <div class="notice-title">${club.clubName}: ${club.title}</div>
+                                <div class="notice-date">${formatEventDate(club.date, club.time)}</div>
+                            </div>
+                            <span class="notice-category category-event">${club.type}</span>
+                        </div>
+                        <div class="notice-desc">${club.description}</div>
+                    </div>
+                `).join('');
+            document.getElementById('adminClubsList').innerHTML = html;
+        }
+
+        // Admin Complaint Functions
+        function renderAdminComplaints(filter = 'All') {
+            const filtered = filter === 'All' ? complaints : complaints.filter(c => c.status === filter);
+            
+            const pending = complaints.filter(c => c.status === 'Pending').length;
+            const inProgress = complaints.filter(c => c.status === 'In Progress').length;
+            const resolved = complaints.filter(c => c.status === 'Resolved').length;
+            
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('progressCount').textContent = inProgress;
+            document.getElementById('resolvedCount').textContent = resolved;
+            
+            const html = filtered.length === 0 
+                ? '<div class="empty-state">No complaints to display</div>'
+                : filtered.map((complaint, index) => `
+                    <div class="complaint-item">
+                        <div class="complaint-header">
+                            <div>
+                                <div class="complaint-category urgency-${complaint.urgency.toLowerCase()}">
+                                    ${complaint.category} - ${complaint.urgency} Priority
+                                </div>
+                                <div class="notice-date">${formatDate(complaint.date)} • ${complaint.studentEmail}</div>
+                            </div>
+                            <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '-')}">${complaint.status}</span>
+                        </div>
+                        <div class="notice-desc">${complaint.description}</div>
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            ${complaint.status === 'Pending' ? `<button class="btn btn-secondary" onclick="updateComplaintStatus(${complaints.indexOf(complaint)}, 'In Progress')" style="padding: 6px 12px; font-size: 12px;">Mark In Progress</button>` : ''}
+                            ${complaint.status === 'In Progress' ? `<button class="btn btn-secondary" onclick="updateComplaintStatus(${complaints.indexOf(complaint)}, 'Resolved')" style="padding: 6px 12px; font-size: 12px;">Mark Resolved</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            document.getElementById('adminComplaintsList').innerHTML = html;
+        }
+
+        function filterAdminComplaints(status) {
+            document.querySelectorAll('#admin-complaints .filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderAdminComplaints(status);
+        }
+
+        function updateComplaintStatus(index, status) {
+            complaints[index].status = status;
+            localStorage.setItem('complaints', JSON.stringify(complaints));
+            renderAdminComplaints();
+            renderStudentComplaints();
+        }
+
+        // Admin Feedback
+        function renderAdminFeedback() {
+            const html = feedbacks.length === 0 
+                ? '<div class="empty-state">No feedback submitted yet</div>'
+                : feedbacks.map(feedback => `
+                    <div class="notice-item">
+                        <div class="notice-header">
+                            <div>
+                                <div class="notice-title">${feedback.studentEmail}</div>
+                                <div class="notice-date">${formatDate(feedback.date)} • ${feedback.category}</div>
+                            </div>
+                        </div>
+                        <div class="notice-desc">${feedback.text}</div>
+                    </div>
+                `).join('');
+            document.getElementById('adminFeedbackList').innerHTML = html;
+        }
+
+        // Admin Attendance
+        function renderAdminAttendance() {
+            const html = attendance.map(student => {
+                const percent = ((student.attended / student.total) * 100).toFixed(1);
+                const colorClass = percent < 75 ? 'low' : percent < 85 ? 'medium' : '';
+                return `
+                    <tr>
+                        <td>${student.studentId}</td>
+                        <td>${student.name}</td>
+                        <td>${student.total}</td>
+                        <td>${student.attended}</td>
+                        <td>
+                            <div>${percent}%</div>
+                            <div class="attendance-bar">
+                                <div class="attendance-fill ${colorClass}" style="width: ${percent}%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            document.getElementById('adminAttendanceTable').innerHTML = html;
+        }
+
+        // Student Notice Functions
+        function renderStudentNotices(filter = 'All') {
+            const filtered = filter === 'All' ? notices : notices.filter(n => n.category === filter);
+            const html = filtered.length === 0 
+                ? '<div class="empty-state">No notices to display</div>'
+                : filtered.map(notice => `
+                    <div class="notice-item">
+                        <div class="notice-header">
+                            <div>
+                                <div class="notice-title">${notice.title}</div>
+                                <div class="notice-date">${formatDate(notice.date)}</div>
+                            </div>
+                            <span class="notice-category category-${notice.category.toLowerCase()}">${notice.category}</span>
+                        </div>
+                        <div class="notice-desc">${notice.description}</div>
+                    </div>
+                `).join('');
+            document.getElementById('studentNoticesList').innerHTML = html;
+        }
+
+        function filterStudentNotices(category) {
+            document.querySelectorAll('#student-notices .filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderStudentNotices(category);
+        }
+
+        // Student Events
+        function renderStudentEvents() {
+            const now = new Date();
+            const upcoming = events.filter(e => new Date(e.date) >= now);
+            const html = upcoming.length === 0 
+                ? '<div class="empty-state">No upcoming events</div>'
+                : upcoming.map(event => `
+                    <div class="event-item">
+                        <div class="event-title">${event.name}</div>
+                        <div class="event-date">${formatEventDate(event.date, event.time)}</div>
+                        ${event.description ? `<div class="event-details">${event.description}</div>` : ''}
+                        <div class="event-meta">
+                            <span>📍 ${event.location}</span>
+                        </div>
+                    </div>
+                `).join('');
+            document.getElementById('studentEventsList').innerHTML = html;
+        }
+
+        // Student Clubs
+        function renderStudentClubs(filter = 'All') {
+            const filtered = filter === 'All' ? clubs : clubs.filter(c => c.type === filter);
+            const html = filtered.length === 0 
+                ? '<div class="empty-state">No club activities to display</div>'
+                : filtered.map(club => `
+                    <div class="notice-item">
+                        <div class="notice-header">
+                            <div>
+                                <div class="notice-title">${club.clubName}: ${club.title}</div>
+                                <div class="notice-date">${formatEventDate(club.date, club.time)}</div>
+                            </div>
+                            <span class="notice-category category-event">${club.type}</span>
+                        </div>
+                        <div class="notice-desc">${club.description}</div>
+                    </div>
+                `).join('');
+            document.getElementById('studentClubsList').innerHTML = html;
+        }
+
+        function filterStudentClubs(type) {
+            document.querySelectorAll('#student-clubs .filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderStudentClubs(type);
+        }
+
+        // Student Complaint Functions
+        document.getElementById('studentComplaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const complaint = {
+                id: Date.now(),
+                category: document.getElementById('studentComplaintCategory').value,
+                urgency: document.getElementById('studentComplaintUrgency').value,
+                description: document.getElementById('studentComplaintDesc').value,
+                status: 'Pending',
+                date: new Date().toISOString(),
+                studentEmail: currentUser.email
+            };
+            complaints.unshift(complaint);
+            localStorage.setItem('complaints', JSON.stringify(complaints));
+            showSuccess('studentComplaintSuccess', 'Complaint submitted successfully!');
+            this.reset();
+            renderStudentComplaints();
+            renderAdminComplaints();
+        });
+
+        function renderStudentComplaints() {
+            const myComplaints = complaints.filter(c => c.studentEmail === currentUser.email);
+            const html = myComplaints.length === 0 
+                ? '<div class="empty-state">No complaints submitted yet</div>'
+                : myComplaints.map(complaint => `
+                    <div class="complaint-item">
+                        <div class="complaint-header">
+                            <div>
+                                <div class="complaint-category urgency-${complaint.urgency.toLowerCase()}">
+                                    ${complaint.category} - ${complaint.urgency} Priority
+                                </div>
+                                <div class="notice-date">${formatDate(complaint.date)}</div>
+                            </div>
+                            <span class="status-badge status-${complaint.status.toLowerCase().replace(' ', '-')}">${complaint.status}</span>
+                        </div>
+                        <div class="notice-desc">${complaint.description}</div>
+                    </div>
+                `).join('');
+            document.getElementById('studentComplaintsList').innerHTML = html;
+        }
+
+        // Student Feedback
+        document.getElementById('studentFeedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const feedback = {
+                id: Date.now(),
+                category: document.getElementById('studentFeedbackCategory').value,
+                text: document.getElementById('studentFeedbackText').value,
+                date: new Date().toISOString(),
+                studentEmail: currentUser.email
+            };
+            feedbacks.unshift(feedback);
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+            showSuccess('studentFeedbackSuccess', 'Thank you for your feedback!');
+            this.reset();
+            renderAdminFeedback();
+        });
+
+        // Student Attendance
+        function renderStudentAttendance() {
+            const studentData = attendance.find(s => s.studentId === currentUser.studentId);
+            if (studentData) {
+                const percent = ((studentData.attended / studentData.total) * 100).toFixed(1);
+                document.getElementById('studentTotalClasses').textContent = studentData.total;
+                document.getElementById('studentAttendedClasses').textContent = studentData.attended;
+                document.getElementById('studentAttendancePercent').textContent = percent + '%';
+                
+                const subjectsHtml = studentData.subjects.map(subject => {
+                    const subPercent = ((subject.attended / subject.total) * 100).toFixed(1);
+                    const colorClass = subPercent < 75 ? 'low' : subPercent < 85 ? 'medium' : '';
+                    return `
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 500;">${subject.name}</span>
+                                <span style="color: var(--color-text-secondary);">${subject.attended}/${subject.total} (${subPercent}%)</span>
+                            </div>
+                            <div class="attendance-bar">
+                                <div class="attendance-fill ${colorClass}" style="width: ${subPercent}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                document.getElementById('studentSubjectAttendance').innerHTML = subjectsHtml;
+            }
+        }
+
+        // Utility Functions
+        function showSuccess(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function formatEventDate(date, time) {
+            const d = new Date(date);
+            const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            return `${dateStr} at ${time}`;
+        }
+    </script>
+</body>
+</html>
